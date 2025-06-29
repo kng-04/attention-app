@@ -27,12 +27,14 @@ const createWindow = () => {
   mainWindow.webContents.openDevTools();
 };
 
+/* ----------  App lifecycle  ---------- */
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createWindow();
 
+  /* ----- IPC navigation ----- */
   //Go from home to menu
   ipcMain.on('navigate-to-menu', () => {
     if (mainWindow) {
@@ -49,6 +51,7 @@ app.whenReady().then(() => {
     }
   });
 
+  /* macOS: recreate window when dock icon clicked and no other windows open */
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   app.on('activate', () => {

@@ -4,7 +4,14 @@ window.addEventListener('DOMContentLoaded', () => {
   const menuBtn = document.getElementById('menuBtn');
   if (menuBtn) {
     menuBtn.addEventListener('click', () => {
-      ipcRenderer.send('navigate-to-menu');
+      window.electronAPI.goToMenu();
+    });
+  }
+
+  const homeBtn = document.getElementById('homeBtn');
+  if (homeBtn) {
+    homeBtn.addEventListener('click', () => {
+      window.electronAPI.goToHome();
     });
   }
 });
