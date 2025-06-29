@@ -107,3 +107,37 @@ body {
   height: 30px;
   margin-left: -0.3rem;
 }
+
+.center-wrapper {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Menu button */
+.menu-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: #fddfea;
+  border: none;
+  border-radius: 12px;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.menu-btn:hover {
+  background-color: #ffcfe0;
+}
+
+.menu-btn img {
+  width: 27px;
+  height: 30px;
+  margin-left: -0.4rem;
+}
