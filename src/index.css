@@ -6,12 +6,14 @@ body {
   padding: 2rem;
 }
 
+/* lining the back home button */
 .header-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+/* button grid for menu */
 .button-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2 buttons per row */
@@ -21,6 +23,7 @@ body {
   justify-content: center; /* center them horizontally */
 }
 
+/* size of buttons on grid */
 .button-grid button {
   width: 200px;
   height: 200px;
@@ -29,5 +32,51 @@ body {
   line-height: 1.5;
   white-space: normal; /* allow line wrapping inside button */
 }
+
+/* ==== Main button styling for menu icons ==== */
+.emoji-btn {
+  /* Size of the button (matches container grid cell) */
+  width: 100%;
+  height: 100%;
+
+  /* Background image settings */
+  background-size: cover;              /* fills the whole button */
+  background-repeat: no-repeat;        /* prevents tiling */
+  background-position: center;         /* centers image inside button */
+  background-color: white;             /* fallback background color */
+
+  /* Layout inside the button (text placement) */
+  display: flex;                       /* enables flex layout */
+  flex-direction: column;             /* text flows vertically */
+  align-items: center;                /* horizontally center text */
+  justify-content: flex-start;          /* push text to the top */
+  align-items: center;                  /* space inside button */
+  padding-top: 0.6rem;           /* add space from the top */
+
+  /* Text appearance */
+  font-size: 1rem;
+  font-weight: 500;
+  color: black;
+  text-align: center;
+  text-shadow: 0 1px 2px white;        /* improves contrast */
+
+  /* Button appearance */
+  border: 1px solid #ccc;
+  border-radius: 12px;                 /* rounded corners */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* soft shadow */
+}
+
+.text-btn { background-image: url('./assets/text.png'); }
+.call-btn { background-image: url('./assets/call.png'); }
+.hug-btn  { background-image: url('./assets/hug.png'); }
+.food-btn { background-image: url('./assets/food.png'); }
+
+.emoji-btn span {
+  z-index: 1;                            /* ensures text appears above background */
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  font-weight: bold;                    /* <-- makes the text bold */
+}
+
 
 
