@@ -141,3 +141,26 @@ body {
   height: 30px;
   margin-left: -0.4rem;
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1e1e1e;
+    color: white;
+  }
+
+  .menu-btn:hover,
+  .back-btn:hover {
+    background-color: #C9A0FF;
+  }
+
+  .emoji-btn {
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    color: black;
+  }
+
+  .emoji-btn span {
+    text-shadow: none;
+    color: black;
+  }
+}
