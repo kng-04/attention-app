@@ -12,3 +12,22 @@ body {
   align-items: center;
 }
 
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 buttons per row */
+  gap: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  justify-content: center; /* center them horizontally */
+}
+
+.button-grid button {
+  width: 200px;
+  height: 200px;
+  font-size: 1rem;
+  text-align: center;
+  line-height: 1.5;
+  white-space: normal; /* allow line wrapping inside button */
+}
+
+
