@@ -1,6 +1,7 @@
 Run the web
 - npm start
 - rs to restart
+
 Build the app
 - This will: 'npm run make'
   - Package your Electron app
