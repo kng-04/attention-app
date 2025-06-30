@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,17 +9,21 @@
     content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
   <title>Attention App!</title>
   <link rel="stylesheet" href="./index.css" />
-  <script defer src="./render.js"></script>
+  <script src="./index-render.js" defer></script>
 </head>
 
 <body class="center-wrapper">
   <h1>💖 Attention App!</h1>
   <p>Welcome to your get my attention app.</p>
 
-  <button id="menuBtn" class="menu-btn">
-    <img src="./assets/menu.png" alt="Menu icon" class="menu-icon" />
-    <span>Go to Menu</span>
-  </button>
-</body>
+  <div class="button-row" style="display: flex; gap: 1em; justify-content: center; margin-top: 2em;">
+    <a href="./menu.html" class="menu-btn">
+      <img src="./assets/menu.png" alt="Menu icon" class="menu-icon" />
+      <span>Go to Menu</span>
+    </a>
 
+    <!-- This will be replaced based on localStorage -->
+    <div id="partnerButtonContainer"></div>
+  </div>
+</body>
 </html>

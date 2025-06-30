@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <meta 
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+  <title>Add Partner Details</title>
+  <link rel="stylesheet" href="./index.css" />
+  <script src="./partner-details.js" defer></script>
+</head>
+
+<body class="center-wrapper">
+  <h1>📝 Add Partner Details</h1>
+
+  <form class="partner-form" id="partnerForm">
+    <!-- Name Fields Row -->
+    <div style="display: flex; flex-wrap: wrap; margin-bottom: 1.5em;">
+      <div style="flex: 1; display: flex; flex-direction: column; padding-right: 0.75em;">
+        <label for="partnerFName">First Name:</label>
+        <input type="text" id="partnerFName" name="partnerFName" required />
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; padding-left: 0.75em;">
+        <label for="partnerLName">Last Name:</label>
+        <input type="text" id="partnerLName" name="partnerLName" required />
+      </div>
+    </div>
+
+    <!-- Phone -->
+    <div style="margin-bottom: 1.5em;">
+      <label for="partnerPhone">Phone Number:</label><br />
+      <input type="tel" id="partnerPhone" name="partnerPhone" required />
+    </div>
+
+    <!-- Save Button -->
+    <button type="submit" class="menu-btn">
+      <img src="./assets/save.png" alt="Save icon" class="menu-icon" />
+      <span>Save</span>
+    </button>
+  </form>
+</body>
+
+</html>
