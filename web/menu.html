@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: file:;">
+    <title>Menu Page</title>
+    <link rel="stylesheet" href="index.css" />
+    <script defer src="menu.js"></script>
+  </head>
+  <body>
+    <div class="header-row">
+      <h1>📋 Menu</h1>
+      <button id="backBtn" class="back-btn">
+        <img src="./assets/home.png" alt="Home icon" class="back-icon" />
+        <span>Back to Home</span>
+      </button>
+    </div>
+
+    <div class="button-grid">
+      <button class="emoji-btn text-btn"><span>Text Me</span></button>
+      <button class="emoji-btn call-btn"><span>Call Me</span></button>
+      <button class="emoji-btn hug-btn"><span>Cuddles Please</span></button>
+      <button class="emoji-btn food-btn"><span>I'm Hungry</span></button>
+    </div>
+  </body>
+</html>

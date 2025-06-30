@@ -1,5 +1,3 @@
-const { ipcRenderer } = require('electron');
-
 window.addEventListener('DOMContentLoaded', () => {
   const menuBtn = document.getElementById('menuBtn');
   if (menuBtn) {

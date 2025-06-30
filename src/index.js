@@ -15,13 +15,13 @@ const createWindow = () => {
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      contextIsolation: false,
-      nodeIntegration: true
+      contextIsolation: true,
+      nodeIntegration: false
     },
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  mainWindow.loadFile(path.join(__dirname, '../web/index.html'));
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
@@ -38,7 +38,7 @@ app.whenReady().then(() => {
   //Go from home to menu
   ipcMain.on('navigate-to-menu', () => {
     if (mainWindow) {
-      mainWindow.loadFile(path.join(__dirname, 'menu.html'));
+      mainWindow.loadFile(path.join(__dirname, '../web/menu.html'));
     } else {ˆ	
       console.error('mainWindow is undefined');
     }
@@ -47,8 +47,24 @@ app.whenReady().then(() => {
   //Go from menu back home
   ipcMain.on('navigate-to-home', () => {
     if (mainWindow) {
-      mainWindow.loadFile(path.join(__dirname, 'index.html'));
+      mainWindow.loadFile(path.join(__dirname, '../web/index.html'));
     }
+  });
+
+  ipcMain.on('navigate-to-text', () => {
+    mainWindow.loadFile(path.join(__dirname, '../web/text.html'));
+  });
+  
+  ipcMain.on('navigate-to-call', () => {
+    mainWindow.loadFile(path.join(__dirname, '../web/call.html'));
+  });
+  
+  ipcMain.on('navigate-to-hug', () => {
+    mainWindow.loadFile(path.join(__dirname, '../web/hug.html'));
+  });
+  
+  ipcMain.on('navigate-to-hungry', () => {
+    mainWindow.loadFile(path.join(__dirname, '../web/hungry.html'));
   });
 
   /* macOS: recreate window when dock icon clicked and no other windows open */
