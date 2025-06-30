@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   document.querySelector('.hug-btn')?.addEventListener('click', () => {
-    window.location.href = './cuddles.html';
+    window.location.href = './hug.html';
   });
 
   document.querySelector('.food-btn')?.addEventListener('click', () => {
