@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
   <title>I'm Hungry</title>
   <link rel="stylesheet" href="./index.css" />
 </head>
+
 <body class="center-wrapper">
   <h1>🍔 I'm Hungry</h1>
   <p>Food is on its way (hopefully)!</p>
@@ -14,6 +17,6 @@
     <span>Back to Menu</span>
   </button>
 
-  <script src="back-to-menu.js" defer></script>
+  <script src="./back-to-menu.js" defer></script>
 </body>
 </html>
