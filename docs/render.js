@@ -1,23 +1,23 @@
 window.addEventListener('DOMContentLoaded', () => {
+  const addBtn = document.getElementById('addPartnerBtn');
   const menuBtn = document.getElementById('menuBtn');
-  if (menuBtn) {
-    menuBtn.addEventListener('click', () => {
-      if (window.electronAPI) {
-        window.electronAPI.goToMenu();  // Electron mode
-      } else {
-        window.location.href = './menu.html';  // Web mode
-      }
-    });
-  }
+  const menuLabel = document.getElementById('menuLabel');
 
-  const homeBtn = document.getElementById('homeBtn');
-  if (homeBtn) {
-    homeBtn.addEventListener('click', () => {
-      if (window.electronAPI) {
-        window.electronAPI.goToHome();
-      } else {
-        window.location.href = './index.html';
-      }
+  if (localStorage.getItem('partnerDetailsAdded') === 'true') {
+    // Hide Add button and show Go to Menu
+    if (addBtn) addBtn.style.display = 'none';
+    if (menuBtn) {
+      menuBtn.style.display = 'inline-flex';
+      menuLabel.textContent = 'Partner Details Added';
+    }
+
+    menuBtn.addEventListener('click', () => {
+      window.location.href = './menu.html';
+    });
+  } else {
+    // Default click listener to go to menu
+    menuBtn?.addEventListener('click', () => {
+      window.location.href = './menu.html';
     });
   }
 });
