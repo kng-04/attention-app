@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (form) {
     form.addEventListener('submit', function (e) {
-      e.preventDefault(); // Prevent page reload
+      e.preventDefault();
 
       const firstName = document.getElementById('partnerFName').value.trim();
       const lastName = document.getElementById('partnerLName').value.trim();
@@ -14,10 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      const partnerData = { firstName, lastName, phone };
+      const partnerData = {
+        firstName,
+        lastName,
+        phone
+      };
+
       localStorage.setItem('partnerDetails', JSON.stringify(partnerData));
       localStorage.setItem('partnerDetailsAdded', 'true');
 
+      // ✅ This must redirect to index.html for the updated button to load
       window.location.href = './index.html';
     });
   }
