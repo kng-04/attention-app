@@ -6,14 +6,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light dark" />
   <meta 
-    http-equiv="Content-Security-Policy"
-    content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self';
+              script-src 'self';
+              style-src 'self' 'unsafe-inline';
+              img-src 'self' data:;">
   <title>Cuddles Please</title>
   <link rel="stylesheet" href="./index.css" />
+  <script src="./hug-render.js" defer></script>
 </head>
 
 <body class="center-wrapper">
-  <h1>🧸 Cuddles Please</h1>
+  
+  <!-- Header -->
+  <div class="header-row">
+    <h1>🧸 Cuddles Please</h1>
+    <button id="backBtn" class="back-btn">
+      <img src="./assets/home.png" alt="Home icon" class="back-icon" />
+      <span>Back to Menu</span>
+    </button>
+  </div>
+
   <p>Big warm hugs coming your way!</p>
 
   <button id="backBtn" class="back-btn">
@@ -21,6 +34,16 @@
     <span>Back to Menu</span>
   </button>
 
+  <!-- Default message with send button -->
+  <div class="default-row">
+    <p class="default-msg">"Hey! Can we cuddle ? 🥺"</p>
+    <button id="defaultBtn" class="menu-btn">
+      <img src="./assets/text.png" alt="Text icon" class="menu-icon" />
+      <span>Send Default Message</span>
+    </button>
+  </div>
+
+  <!-- Reuse this across all pages -->
   <script defer src="./back-to-menu.js"></script>
 </body>
 </html>
