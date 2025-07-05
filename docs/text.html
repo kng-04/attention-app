@@ -1,27 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light dark" />
   <meta 
     http-equiv="Content-Security-Policy"
-    content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+    content="default-src 'self';
+             script-src 'self';
+             style-src 'self' 'unsafe-inline';
+             img-src 'self' data:;">
   <title>Text Me</title>
   <link rel="stylesheet" href="./index.css" />
+  <script src="./text-render.js" defer></script>
 </head>
 
 <body class="center-wrapper">
-  <h1>📱 Text Me</h1>
-  <p>You chose to be texted!</p>
 
-  <button id="backBtn" class="back-btn">
-    <img src="./assets/home.png" alt="Home icon" class="back-icon" />
-    <span>Back to Menu</span>
-  </button>
+  <!-- Header -->
+  <div class="header-row">
+    <h1>📱 Text Me</h1>
+    <button id="backBtn" class="back-btn">
+      <img src="./assets/home.png" alt="Home icon" class="back-icon" />
+      <span>Back to Menu</span>
+    </button>
+  </div>
 
-  <script defer src="./back-to-menu.js"></script>
+  <p>Send a sweet message to your partner!</p>
+
+  <!-- Text input row -->
+  <div class="text-row">
+    <textarea id="customMsg" rows="3" placeholder="Enter a custom message..."></textarea>
+    <a id="smsBtn" class="menu-btn" href="#">
+      <img src="./assets/text.png" alt="Text icon" class="menu-icon" />
+      <span>Send Text</span>
+    </a>
+  </div>
+
+  <!-- Default message with send button -->
+  <div class="default-row">
+    <p class="default-msg">"Hey! Just sending a little love 💖"</p>
+    <button id="defaultBtn" class="menu-btn">
+      <img src="./assets/text.png" alt="Text icon" class="menu-icon" />
+      <span>Send Default Message</span>
+    </button>
+  </div>
+
+  <!-- Reuse this across all pages -->
+  <script src="./back-to-menu.js" defer></script>
 </body>
-
 </html>

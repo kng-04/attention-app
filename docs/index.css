@@ -185,4 +185,146 @@ body {
     text-shadow: none;
     color: black;
   }
+
+  /* For text.html */
+  .menu-btn.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .text-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin-top: 1rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.text-row textarea {
+  width: 250px;
+  height: 60px;
+  padding: 0.6em;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: none;
+  background-color: #1e1e1e;
+  color: white;
+}
+
+.button-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  align-items: center;
+}
+
+.menu-btn, .back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.menu-btn {
+  background-color: #fddfea;
+  color: black;
+}
+
+.back-btn {
+  background-color: #fddfea;
+  color: black;
+}
+
+.menu-btn:hover, .back-btn:hover {
+  background-color: #ffcfe0;
+}
+
+.menu-icon, .back-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.text-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 700px;
+}
+
+.text-row textarea {
+  flex: 1;
+  min-width: 280px;
+  max-width: 400px;
+  height: 80px;
+  padding: 1rem;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  border: 2px solid #ccc;
+  resize: none;
+  background-color: #1e1e1e;
+  color: white;
+  font-family: inherit;
+}
+
+.button-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.text-row a.menu-btn {
+  height: fit-content;
+  white-space: nowrap;
+  font-size: 1.05rem;
+}
+
+
+/* Optional: Make textarea and buttons consistent in appearance */
+textarea::placeholder {
+  color: #888;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.default-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.default-msg {
+  background-color: #2a2a2a;
+  color: white;
+  border: 1px solid #ccc;
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
 }
