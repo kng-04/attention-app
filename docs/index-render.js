@@ -19,7 +19,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (hasDetails) {
     pdName.textContent = `${data.firstName} ${data.lastName}`;
-    pdPhone.textContent = data.phone;
+
+    let formattedPhone = data.phone;
+
+    // Normalize to +64 format if needed and format it for display
+    if (/^0\d{8,9}$/.test(data.phone)) {
+      const normalized = '+64' + data.phone.slice(1);
+      formattedPhone = normalized.replace(
+        /^\+64(\d{1,2})(\d{3})(\d{3,4})$/,
+        '+64 $1 $2 $3'
+      );
+    } else if (/^\+64\d{8,9}$/.test(data.phone)) {
+      formattedPhone = data.phone.replace(
+        /^\+64(\d{1,2})(\d{3})(\d{3,4})$/,
+        '+64 $1 $2 $3'
+      );
+    }
+
+    pdPhone.textContent = formattedPhone;
 
     container.innerHTML = `
       <button class="menu-btn" id="viewBtn">
