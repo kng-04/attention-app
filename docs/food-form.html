@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Food Order Form</title>
+
+    <!-- Base styles -->
+    <link rel="stylesheet" href="./index.css" />
+    <style>
+      /* Ensure summary text is visible */
+      #summaryText {
+        color: #000;
+      }
+
+      /* Unified pill-style buttons */
+      .action-btn {
+        background-color: #fddfea;
+        color: #000;
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding: 0.9em 1.6em;
+        border: none;
+        border-radius: 1.8em;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65em;
+        transition: background 0.2s ease;
+      }
+      .action-btn:hover {
+        background-color: #fbcfea;
+      }
+      /* Icon inside pill */
+      .action-btn img {
+        height: 1.4em;
+      }
+    </style>
+
+    <!-- === Inline component-specific helpers === -->
+    <script defer>
+      /**
+       * Show/hide the drink textbox when the user toggles the drink checkbox
+       */
+      function toggleDrinkInput() {
+        const drinkInput = document.getElementById("drinkName");
+        const wrapper = document.getElementById("drinkInputWrapper");
+        const checked = document.getElementById("hasDrink").checked;
+
+        wrapper.style.display = checked ? "block" : "none";
+        drinkInput.required = checked;
+    }
+
+
+      // Persist summary text between handlers
+      let latestOrderText = "";
+
+      /**
+       * Main form logic – validate, build summary, show preview & allow edits
+       */
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("foodForm");
+        const summaryWrapper = document.getElementById("orderSummary");
+        const summaryText = document.getElementById("summaryText");
+        const editBtn = document.getElementById("editBtn");
+        const sendBtn = document.getElementById("sendBtn");
+
+        // Handle Save → show preview
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          const restaurant = document
+            .getElementById("restaurant")
+            .value.trim();
+          const foodItems = document.getElementById("foodItems").value.trim();
+          const hasDrink = document.getElementById("hasDrink").checked;
+          const drink = document.getElementById("drinkName").value.trim();
+
+          // Collect checked utilities
+          const utilities = Array.from(
+            document.querySelectorAll("input[name='utilities']:checked")
+          ).map((el) => el.value);
+
+          if (!restaurant || !foodItems) {
+            alert("Please enter both a restaurant and at least one food item.");
+            return;
+          }
+          
+        if (hasDrink && drink === "") {
+            alert("Please enter a drink name if you want a drink.");
+            return;
+        }
+
+          // Build nicely formatted order preview
+          let order = `Restaurant: ${restaurant}\n`;
+          order += `Food Items: ${foodItems}\n`;
+          if (hasDrink) {
+            order += `Drink: ${drink || "[none specified]"}\n`;
+          }
+          if (utilities.length) {
+            order += `Utilities: ${utilities.join(", ")}\n`;
+          }
+
+          latestOrderText = order; // store so Send handler can access
+          summaryText.textContent = order;
+          form.style.display = "none";
+          summaryWrapper.style.display = "block";
+        });
+
+        // Edit → return to form
+        editBtn.addEventListener("click", () => {
+          summaryWrapper.style.display = "none";
+          form.style.display = "block";
+        });
+
+        // Send → launch SMS & reset
+        sendBtn.addEventListener("click", () => {
+        const partner = JSON.parse(localStorage.getItem("partnerDetails"));
+
+        if (partner && partner.phone) {
+            const phone = encodeURIComponent(partner.phone);
+            const message = encodeURIComponent("Heyyyy, I'm hungry can we go get this:\n\n" + latestOrderText);
+            window.location.href = `sms:${phone}?&body=${message}`;
+        } else {
+            alert("No partner phone number saved. Please add partner details first.");
+        }
+
+        // Reset form and UI regardless
+        form.reset();
+        toggleDrinkInput(); // hide drink input
+        summaryWrapper.style.display = "none";
+        form.style.display = "block";
+        });
+
+      });
+    </script>
+  </head>
+
+    <!-- Title row with inline button -->
+    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+        <h1>🍜 Food Order Form</h1>
+        <a href="hungry.html" class="menu-btn">
+            <img src="./assets/back.png" class="menu-icon" alt="home" />
+            Hungry Page
+        </a>
+    </div>
+
+
+    <!-- ================= Main Form ================= -->
+    <form id="foodForm" class="form-wrapper">
+      <!-- Restaurant -->
+      <h2>Restaurant/Food Chain</h2>
+      <input
+        type="text"
+        id="restaurant"
+        name="restaurant"
+        class="input-box"
+        placeholder="Enter restaurant"
+        required
+      />
+
+      <!-- Food Items -->
+      <h2>Food Items</h2>
+      <input
+        type="text"
+        id="foodItems"
+        name="foodItems"
+        class="input-box"
+        placeholder="Enter food items"
+        required
+      />
+
+      <!-- Drinks -->
+      <h2>Drinks</h2>
+      <label class="drink-label">
+        <input 
+            type="checkbox" 
+            id="hasDrink" 
+            onclick="toggleDrinkInput()" 
+        /> I want a drink
+        </label>
+
+        <div id="drinkInputWrapper" style="display: none;">
+        <input
+            type="text"
+            id="drinkName"
+            name="drinkName"
+            placeholder="Enter drink"
+            class="input-box"
+        />
+        </div>
+
+
+      <!-- Utilities -->
+      <h2>Utilities</h2>
+      <div class="utilities-grid">
+        <label><input type="checkbox" name="utilities" value="Spoon" /> Spoon</label>
+        <label><input type="checkbox" name="utilities" value="Fork" /> Fork</label>
+        <label><input type="checkbox" name="utilities" value="Chopsticks" /> Chopsticks</label>
+        <label><input type="checkbox" name="utilities" value="Straw" /> Straw</label>
+      </div>
+
+      <!-- Save button -->
+      <button type="submit" class="action-btn">
+        <img src="./assets/save.png" alt="Save icon" />
+        Save
+      </button>
+    </form>
+
+    <!-- =============== Preview / Confirmation =============== -->
+    <div
+      id="orderSummary"
+      style="display: none; margin-top: 2em; width: 100%; max-width: 500px;"
+    >
+      <h2>🧾 Order Summary</h2>
+      <pre
+        id="summaryText"
+        style="
+          white-space: pre-wrap;
+          background: #fddfea;
+          padding: 1em;
+          border-radius: 8px;
+          border: 1px solid #ddd;
+        "
+      ></pre>
+
+      <div
+        style="display: flex; gap: 1em; margin-top: 1em; justify-content: center;"
+      >
+        <button id="editBtn" class="action-btn" type="button">
+          <img src="./assets/add.png" alt="Edit icon" />
+          Edit Details
+        </button>
+        <button id="sendBtn" class="action-btn" type="button">
+          <img src="./assets/text.png" alt="Send icon" />
+          Send Text
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
