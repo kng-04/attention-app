@@ -1,9 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('partnerForm');
-  const urlParams = new URLSearchParams(window.location.search);
-  const isEdit = urlParams.get('edit') === '1';
+  const pinField = document.getElementById('pinFieldContainer');
 
-  // Prefill if editing
+  // Check if editing an existing user
+  const params = new URLSearchParams(window.location.search);
+  const isEdit = params.get('edit') === '1';
+
+  if (isEdit) {
+    // Hide the PIN field when editing
+    if (pinField) {
+      pinField.style.display = 'none';
+    }
+    const pinInput = document.getElementById('partnerPin');
+    if (pinInput) {
+      pinInput.removeAttribute('required');
+    }
+  }
+
+  // Prefill fields if editing
   if (isEdit) {
     const stored = localStorage.getItem('partnerDetails');
     if (stored) {
@@ -12,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data.firstName && data.lastName && data.phone) {
           document.getElementById('partnerFName').value = data.firstName;
           document.getElementById('partnerLName').value = data.lastName;
-          // Remove +64 for editing if it was stored with it
           document.getElementById('partnerPhone').value = data.phone.replace(/^\+64/, '0');
         }
       } catch (e) {
@@ -21,20 +34,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Save on submit
+  // Save data on submit
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
       const firstName = document.getElementById('partnerFName').value.trim();
       const lastName = document.getElementById('partnerLName').value.trim();
-      const phone = document.getElementById('partnerPhone').value.trim().replace(/\s+/g, '');
-      const formattedPhone = phone.startsWith('0')
-        ? '+64' + phone.slice(1)
-        : phone;
+      const phoneRaw = document.getElementById('partnerPhone').value.trim().replace(/\s+/g, '');
+      const formattedPhone = phoneRaw.startsWith('0') ? '+64' + phoneRaw.slice(1) : phoneRaw;
 
-      if (!firstName || !lastName || !phone) {
-        alert('Please fill in all fields.');
+      const pinInput = document.getElementById('partnerPin');
+      const pin = pinInput ? pinInput.value.trim() : '';
+
+      // Validate fields
+      if (!firstName || !lastName || !phoneRaw || (!isEdit && (!pin || !/^\d{4}$/.test(pin)))) {
+        alert('Please fill in all fields correctly' + (!isEdit ? ' including a 4-digit PIN.' : '.'));
         return;
       }
 
@@ -44,14 +59,14 @@ document.addEventListener('DOMContentLoaded', () => {
         phone: formattedPhone
       };
 
+      if (!isEdit && pin) {
+        partnerData.pin = pin;
+      }
+
       localStorage.setItem('partnerDetails', JSON.stringify(partnerData));
       localStorage.setItem('partnerDetailsAdded', 'true');
 
-      //sessionStorage.setItem('partnerDetails', JSON.stringify(partnerData));
-      //sessionStorage.setItem('partnerDetailsAdded', 'true');
-
-
-      // ✅ This must redirect to index.html for the updated button to load
+      // Redirect back to homepage
       window.location.href = './index.html';
     });
   }

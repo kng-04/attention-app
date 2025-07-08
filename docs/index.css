@@ -640,6 +640,30 @@ input[type="checkbox"]:checked::before {
   margin-bottom: 0.3em;
 }
 
+/* reset if forgot pin */
+button.menu-btn {
+  background-color: #ffddee;
+  padding: 0.8em 1.2em;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
 
+button.menu-btn:hover {
+  background-color: #fbcfea;
+}
+
+button.menu-btn img.menu-icon {
+  height: 1em;
+  margin-right: 0.5em;
+  vertical-align: middle;
+}
+
+.menu-icon {
+  font-size: 1.5em;   /* Instead of width/height */
+  margin-right: 0.4em;
+  vertical-align: middle;
+}
 
 }
