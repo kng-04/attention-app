@@ -37,7 +37,25 @@ document.addEventListener('DOMContentLoaded', () => {
   partnerContainer.innerHTML = '';
   if (menuContainer) menuContainer.innerHTML = '';
   if (forgotContainer) forgotContainer.innerHTML = '';
-  if (pinPrompt) pinPrompt.innerHTML = '';
+  if (pinPrompt) pinPrompt.innerHTML = `
+    <form id="pinForm" style="text-align:center; margin-top: 1em;">
+      <div style="margin-bottom: 1em;">
+        <label for="pinInput"><strong>Enter your 4-digit PIN:</strong></label><br/>
+        <input 
+          type="tel" 
+          id="pinInput" 
+          maxlength="4" 
+          inputmode="numeric" 
+          pattern="\\d{4}" 
+          required 
+          style="padding: 0.75em; width: 10em; font-size: 1.2em; margin-top: 0.5em; text-align: center; border-radius: 0.5em;" />
+      </div>
+      <button type="submit" class="menu-btn" style="margin-top: 0.5em;">
+        <img src="./assets/unlock.png" alt="Unlock" class="menu-icon" />
+        <span>Unlock</span>
+      </button>
+    </form>
+  `;
   detailsCard.style.display = 'none';
 
   // Get stored partner data
@@ -85,19 +103,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (fails >= 3) {
           const pinForm = document.getElementById('pinForm');
 
-          // Create warning text
-          const warn = document.createElement('p');
-          warn.textContent = 'You can now reset your partner details using the button below.';
-          warn.style.color = '#f88';
-          warn.style.marginTop = '0.5em';
-          warn.style.fontWeight = '600';
-
           // Create the "Forgot PIN" button
           const forgotBtn = document.createElement('button');
           forgotBtn.id = 'forgotPinBtn';
           forgotBtn.className = 'menu-btn';
           forgotBtn.style.backgroundColor = '#f88';
-          forgotBtn.style.marginTop = '1em';
+          forgotBtn.style.marginTop = '2em';
           forgotBtn.innerHTML = `
             <img src="./assets/forgot.png" class="menu-icon" alt="Forgot PIN" />
             <span>Forgot PIN?</span>
@@ -111,6 +122,13 @@ document.addEventListener('DOMContentLoaded', () => {
               location.reload();
             }
           });
+
+          // Create warning text
+          const warn = document.createElement('p');
+          warn.textContent = 'You can now reset your partner details using the button below.';
+          warn.style.color = '#f88';
+          warn.style.marginTop = '0.75em';
+          warn.style.fontWeight = '600';
 
           // Append both below the form
           if (pinForm) {
