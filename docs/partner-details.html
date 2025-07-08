@@ -35,6 +35,12 @@
       <input type="tel" id="partnerPhone" name="partnerPhone" class="input-box" required />
     </div>
 
+    <!-- PIN (only shown on first-time setup) -->
+    <div id="pinFieldContainer" style="margin-bottom: 1.5em;">
+      <label for="partnerPin">Set a 4-digit PIN:</label><br />
+      <input type="password" id="partnerPin" name="partnerPin" class="input-box" pattern="\d{4}" required />
+    </div>
+
     <!-- Save Button -->
     <button type="submit" class="menu-btn">
       <img src="./assets/save.png" alt="Save icon" class="menu-icon" />
