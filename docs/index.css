@@ -576,4 +576,70 @@ input[type="checkbox"]:checked::before {
   height: 1.4em;
 }
 
+/* Icons */
+.option-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4em;
+  padding: 1em 1.4em;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 1.8em;
+  background-color: #ffddee;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  width: 140px;
+}
+
+.option-btn:hover {
+  background-color: #fbcfea;
+}
+
+.option-btn .icon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.btn-row {
+  display: flex;
+  gap: 2em;
+  justify-content: center;
+  margin-top: 1.5em;
+}
+
+.option-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4em;
+  padding: 1em 1.6em;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 1.8em;
+  background-color: #ffddee;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  width: 140px;
+}
+
+.option-btn:hover {
+  background-color: #fbcfea;
+}
+
+.option-btn .icon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.header-row h1 {
+  margin-bottom: 0.3em;
+}
+
+
+
 }
