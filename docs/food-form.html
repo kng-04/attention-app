@@ -121,12 +121,19 @@
         if (partner && partner.phone) {
             const phone = encodeURIComponent(partner.phone);
             const message = encodeURIComponent("Heyyyy, I'm hungry can we go get this:\n\n" + latestOrderText);
+            
+            // Launch SMS app
             window.location.href = `sms:${phone}?&body=${message}`;
+
+            // Redirect to menu.html after short delay
+            setTimeout(() => {
+                window.location.href = "menu.html";
+            }, 500); // adjust delay if needed
         } else {
             alert("No partner phone number saved. Please add partner details first.");
         }
 
-        // Reset form and UI regardless
+        // Reset form and UI
         form.reset();
         toggleDrinkInput(); // hide drink input
         summaryWrapper.style.display = "none";
