@@ -13,7 +13,7 @@ function registerFail () {
 }
 /* helper – reset counter + validation */
 function resetSessionFlags () {
-  sessionStorage.removeItem('pinFailCount');
+  sessionStorage.removeItem(FAIL_KEY);
   sessionStorage.removeItem('pinValidated');
 }
 
@@ -96,7 +96,29 @@ document.addEventListener('DOMContentLoaded', () => {
       if (inputPin === data.pin) {
         resetSessionFlags();
         sessionStorage.setItem('pinValidated', 'true');
-        location.reload();
+
+        partnerContainer.innerHTML = `
+          <a href="#" class="menu-btn" id="viewBtn">
+            <img src="./assets/add.png" class="menu-icon" alt="view" />
+            <span>View Partner Details</span>
+          </a>`;
+        if (menuContainer) {
+          menuContainer.innerHTML = `
+            <a href="./menu.html" class="menu-btn">
+              <img src="./assets/menu.png" class="menu-icon" alt="menu" />
+              <span>Go to Menu</span>
+            </a>`;
+        }
+
+        detailsCard.style.display = 'none';
+
+        document.getElementById('viewBtn')?.addEventListener('click', () => {
+          detailsCard.style.display = detailsCard.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Clear the PIN prompt after login
+        pinPrompt.innerHTML = '';
+
       } else {
         const fails = registerFail();
         alert(`Incorrect PIN (${fails}/3).`);
@@ -167,24 +189,4 @@ document.addEventListener('DOMContentLoaded', () => {
     formattedPhone = data.phone.replace(/^\+64(\d{2})(\d{3})(\d{3,4})$/, '+64 $1 $2 $3');
   }
   pdPhone.textContent = formattedPhone;
-
-  detailsCard.style.display = 'block';
-
-  partnerContainer.innerHTML = `
-    <a href="#" class="menu-btn" id="viewBtn">
-      <img src="./assets/add.png" class="menu-icon" alt="view" />
-      <span>View Partner Details</span>
-    </a>`;
-
-  if (menuContainer) {
-    menuContainer.innerHTML = `
-      <a href="./menu.html" class="menu-btn">
-        <img src="./assets/menu.png" class="menu-icon" alt="menu" />
-        <span>Go to Menu</span>
-      </a>`;
-  }
-
-  document.getElementById('viewBtn')?.addEventListener('click', () => {
-    detailsCard.style.display = detailsCard.style.display === 'block' ? 'none' : 'block';
-  });
 });
