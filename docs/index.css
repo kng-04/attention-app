@@ -412,6 +412,168 @@ input[type="checkbox"]:checked::before {
   font-size: 1rem;
 }
 
+/* === Unsure Food Form Styles === */
 
+.hidden {
+  display: none;
+}
+
+.option-btn {
+  background-color: #fddfea;
+  border: none;
+  padding: 0.7em 1.3em;
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0.5em;
+  border-radius: 1em;
+  cursor: pointer;
+}
+
+.option-btn:hover {
+  background-color: #fbcfea;
+}
+
+.input-box {
+  display: block;
+  margin: 1em auto;
+  padding: 0.6em;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 0.5em;
+  border: 1px solid #ccc;
+}
+
+.inline-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  flex-wrap: wrap;
+  margin-top: 1em;
+}
+
+.send-btn {
+  background-color: #fddfea;
+  padding: 0.7em 1.5em;
+  font-weight: bold;
+  border-radius: 1em;
+  border: none;
+  margin-top: 2em;
+  cursor: pointer;
+}
+
+.action-btn {
+  background-color: #fddfea;
+  color: #000;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 0.9em 1.6em;
+  border: none;
+  border-radius: 1.8em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65em;
+  transition: background 0.2s ease;
+}
+.action-btn:hover {
+  background-color: #fbcfea;
+}
+.action-btn img {
+  height: 1.4em;
+}
+
+.order-summary-box {
+  background-color: pink;
+  border-radius: 10px;
+  padding: 1em;
+  margin: 1em 0;
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+.action-row {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.order-summary {
+  margin-top: 2em;
+  text-align: center;
+}
+
+.summary-box {
+  background-color: #ffcddd;
+  padding: 1em;
+  border-radius: 1em;
+  width: 80%;
+  margin: 0 auto 1em;
+  font-family: monospace;
+  font-size: 1rem;
+  white-space: pre-line;
+  text-align: left;
+}
+
+.summary-btn {
+  background-color: #ffd3dd;
+  border: none;
+  border-radius: 2em;
+  padding: 0.8em 2em;
+  margin: 0.5em;
+  font-size: 1rem;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.summary-btn img {
+  height: 1.2em;
+}
+
+/* Unsure Summary Text Styling */
+#summaryText {
+  color: #000;
+  white-space: pre-wrap;
+  background: #fddfea;
+  padding: 1em;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Order summary box */
+.summary-text {
+  color: #000;
+  white-space: pre-wrap;
+  background: #fddfea;
+  padding: 1em;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Buttons */
+.action-btn {
+  background-color: #fddfea;
+  color: #000;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 0.9em 1.6em;
+  border: none;
+  border-radius: 1.8em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65em;
+  transition: background 0.2s ease;
+}
+.action-btn:hover {
+  background-color: #fbcfea;
+}
+.action-btn img {
+  height: 1.4em;
+}
 
 }
