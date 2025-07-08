@@ -76,14 +76,21 @@ document.addEventListener('DOMContentLoaded', () => {
       <form id="pinForm" style="text-align:center; margin-top: 1em;">
         <div style="margin-bottom: 1em;">
           <label for="pinInput"><strong>Enter your 4-digit PIN:</strong></label><br/>
-          <input 
-            type="tel" 
-            id="pinInput" 
-            maxlength="4" 
-            inputmode="numeric" 
-            pattern="\\d{4}" 
-            required 
-            style="padding: 0.75em; width: 10em; font-size: 1.2em; margin-top: 0.5em; text-align: center; border-radius: 0.5em;" />
+          <div style="position: relative; display: inline-block;">
+            <input 
+              type="password" 
+              id="pinInput" 
+              maxlength="4" 
+              inputmode="numeric" 
+              pattern="\\d{4}" 
+              required 
+              style="padding: 0.75em; width: 10em; font-size: 1.2em; margin-top: 0.5em; text-align: center; border-radius: 0.5em;" />
+            <button type="button" id="togglePin" 
+              style="position: absolute; right: -2em; top: 50%; transform: translateY(-50%);
+                    font-size: 1.1em; background: none; border: none; cursor: pointer;">
+              👁
+            </button>
+          </div>
         </div>
         <button type="submit" class="menu-btn" style="margin-top: 0.5em;">
           <img src="./assets/unlock.png" alt="Unlock" class="menu-icon" />
@@ -92,17 +99,41 @@ document.addEventListener('DOMContentLoaded', () => {
       </form>
     `;
 
+    // Toggle PIN visibility
+    const toggleBtn = document.getElementById('togglePin');
+    const pinInput = document.getElementById('pinInput');
+
+    toggleBtn?.addEventListener('click', () => {
+      if (pinInput.type === 'password') {
+        pinInput.type = 'tel';
+        toggleBtn.textContent = '🙈';
+      } else {
+        pinInput.type = 'password';
+        toggleBtn.textContent = '👁';
+      }
+    });
+
+    // Handle PIN submit
     document.getElementById('pinForm')?.addEventListener('submit', (e) => {
       e.preventDefault();
+      
       const inputPin = document.getElementById('pinInput').value.trim();
+      const fails = Number(sessionStorage.getItem(FAIL_KEY) || 0);
+
+      // 🔐 Prevent further PIN checks after lockout
+      if (fails >= MAX_PIN_ATTEMPTS) {
+        alert("PIN entry locked. Please use the 'Forgot PIN' option.");
+        return;
+      }
+
       if (inputPin === data.pin) {
         resetSessionFlags();
         pinPrompt.innerHTML = '';
         detailsCard.classList.remove('hidden');
       } else {
-        const fails = registerFail();
-        alert(`Incorrect PIN (${fails}/3).`);
-        if (fails >= MAX_PIN_ATTEMPTS) {
+        const updatedFails = registerFail();
+        alert(`Incorrect PIN (${updatedFails}/3).`);
+        if (updatedFails >= MAX_PIN_ATTEMPTS) {
           showForgotOption();
         }
       }
@@ -121,6 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const forgotBtn = document.createElement('button');
     forgotBtn.id = 'forgotPinBtn';
+    forgotBtn.type = 'button';
     forgotBtn.className = 'menu-btn';
     forgotBtn.style.backgroundColor = '#f88';
     forgotBtn.style.marginTop = '1em';
