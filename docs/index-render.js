@@ -82,7 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
         <label for="pinInput"><strong>Enter your 4-digit PIN:</strong></label><br/>
         <input type="password" id="pinInput" maxlength="4" style="padding: 0.5em; width: 8em; margin-top: 0.5em;" pattern="\\d{4}" required />
         <br/>
-        <button type="submit" class="menu-btn" style="margin-top: 1em;">Unlock</button>
+        <button type="submit" class="menu-btn" style="margin-top: 1em;">
+          <img src="./assets/unlock.png" alt="Unlock" class="menu-icon" />
+          <span>Unlock</span>
+        </button>
       </form>
     `;
     document.getElementById('pinForm')?.addEventListener('submit', (e) => {
