@@ -62,11 +62,11 @@
     </div>
   </div>
 
-  <!-- ============ RETURN TO MENU BUTTON ============ -->
+  <!-- ============ RETURN TO MENU ============ -->
   <div id="afterSend" style="display:none;text-align:center;margin-top:2em;">
     <p>Once you're done with your message, click below to go back.</p>
-    <button onclick="window.location.href='menu.html'" class="action-btn">
-      Go to Menu
+    <button onclick="window.location.href='unsure-food-form.html'" class="action-btn">
+      Go to I'm Hungry Menu
     </button>
   </div>
 
@@ -116,9 +116,9 @@
       // Open SMS app
       window.location.href = sms;
 
-      // When user returns to the browser, show 'return to menu' button
-      orderSummary.style.display = 'none';
-      document.getElementById('afterSend').style.display = 'block';
+      setTimeout(() => {
+        window.location.href = 'unsure-food-form.html';
+      }, 500); // Adjust delay if needed
     });
   </script>
 </body>

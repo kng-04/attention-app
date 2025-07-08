@@ -125,9 +125,9 @@
             // Launch SMS app
             window.location.href = `sms:${phone}?&body=${message}`;
 
-            // Redirect to menu.html after short delay
+            // Redirect to hungry.html after short delay
             setTimeout(() => {
-                window.location.href = "menu.html";
+                window.location.href = "hungry.html";
             }, 500); // adjust delay if needed
         } else {
             alert("No partner phone number saved. Please add partner details first.");

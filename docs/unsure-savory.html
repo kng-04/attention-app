@@ -53,11 +53,11 @@
     </div>
   </div>
 
-  <!-- ====== After SMS View ====== -->
+  <!-- ============ RETURN TO MENU ============ -->
   <div id="afterSend" style="display:none;text-align:center;margin-top:2em;">
     <p>Once you're done with your message, click below to go back.</p>
-    <button onclick="window.location.href='menu.html'" class="action-btn">
-      Go to Menu
+    <button onclick="window.location.href='unsure-food-form.html'" class="action-btn">
+      Go to I'm Hungry Menu
     </button>
   </div>
 
@@ -78,21 +78,22 @@
       // Send → SMS and show return button
       document.getElementById("sendBtn").addEventListener("click", () => {
         const partner = JSON.parse(localStorage.getItem("partnerDetails"));
-        if (partner && partner.phone) {
-          const phone = encodeURIComponent(partner.phone);
-          const message = encodeURIComponent("I don't know what I want but I feel like:\n" + latestUnsureOrder);
-          
-          // Open SMS app
-          window.location.href = `sms:${phone}?&body=${message}`;
-
-          // Show return button instead of auto redirect
-          summaryWrapper.style.display = "none";
-          document.getElementById("afterSend").style.display = "block";
-        } else {
+        if (!partner || !partner.phone) {
           alert("No partner phone number saved. Please add partner details first.");
+          return;
         }
 
-        form.reset();
+        const fullMsg =
+          "I don't know what I want but I feel like:\n" + latestUnsureOrder;
+        const sms = `sms:${encodeURIComponent(partner.phone)}?&body=${encodeURIComponent(fullMsg)}`;
+
+        // Launch SMS app
+        window.location.href = sms;
+
+        // Auto-redirect to menu after short delay (0.5 seconds)
+        setTimeout(() => {
+          window.location.href = "unsure-food-form.html";
+        }, 500);
       });
 
       // Submit → validate & show summary
