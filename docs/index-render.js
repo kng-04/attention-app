@@ -85,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (fails >= 3) {
           const pinForm = document.getElementById('pinForm');
 
-          renderResetButton();
           // Create warning text
           const warn = document.createElement('p');
           warn.textContent = 'You can now reset your partner details using the button below.';
