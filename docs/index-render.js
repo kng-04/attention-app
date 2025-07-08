@@ -59,22 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  // Show "Forgot PIN?" button
-  function renderResetButton() {
-    forgotContainer.innerHTML = `
-      <button id="forgotPinBtn" class="menu-btn" style="background-color:#f88;">
-        <img src="./assets/forgot.png" class="menu-icon" alt="Forgot PIN" />
-        <span>Forgot PIN?</span>
-      </button>`;
-    document.getElementById('forgotPinBtn')?.addEventListener('click', () => {
-      if (confirm('⚠️ This will permanently erase your partner details.')) {
-        localStorage.removeItem('partnerDetails');
-        resetSessionFlags();
-        location.reload();
-      }
-    });
-  }
-
   // Ask for PIN if not validated this session
   if (!skipPin && data.pin) {
     pinPrompt.innerHTML = `
@@ -101,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (fails >= 3) {
           renderResetButton();
           const warn = document.createElement('p');
-          warn.textContent = 'You can now reset your partner details using the button above.';
+          warn.textContent = 'You can now reset your partner details using the button below.';
           warn.style.color = '#f88';
           warn.style.marginTop = '0.5em';
           warn.style.fontWeight = '600';
@@ -110,6 +94,22 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
     return;
+  }
+
+  // Show "Forgot PIN?" button
+  function renderResetButton() {
+    forgotContainer.innerHTML = `
+      <button id="forgotPinBtn" class="menu-btn" style="background-color:#f88;">
+        <img src="./assets/forgot.png" class="menu-icon" alt="Forgot PIN" />
+        <span>Forgot PIN?</span>
+      </button>`;
+    document.getElementById('forgotPinBtn')?.addEventListener('click', () => {
+      if (confirm('⚠️ This will permanently erase your partner details.')) {
+        localStorage.removeItem('partnerDetails');
+        resetSessionFlags();
+        location.reload();
+      }
+    });
   }
 
   // Show data
