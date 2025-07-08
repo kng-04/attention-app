@@ -63,11 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderResetButton() {
     forgotContainer.innerHTML = `
       <button id="forgotPinBtn" class="menu-btn" style="background-color:#f88;">
-        <img src="./assets/delete.png" class="menu-icon" alt="Reset"/>
-        <span>Forgot PIN? (clears details)</span>
+        <img src="./assets/forgot.png" class="menu-icon" alt="Forgot PIN" />
+        <span>Forgot PIN?</span>
       </button>`;
     document.getElementById('forgotPinBtn')?.addEventListener('click', () => {
-      if (confirm('⚠️ This will permanently erase your partner details.\nContinue?')) {
+      if (confirm('⚠️ This will permanently erase your partner details.')) {
         localStorage.removeItem('partnerDetails');
         resetSessionFlags();
         location.reload();
