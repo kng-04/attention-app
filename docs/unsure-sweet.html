@@ -104,7 +104,14 @@
       }
       const fullMsg = `I don't know what I want but I feel like:\n${latestDessertMsg}`;
       const sms = `sms:${encodeURIComponent(partner.phone)}?&body=${encodeURIComponent(fullMsg)}`;
+
+      // Open SMS app
       window.location.href = sms;
+
+      // Then redirect to menu.html after a short delay
+      setTimeout(() => {
+        window.location.href = 'menu.html';
+      }, 500); // Adjust delay if needed
     });
   </script>
 </body>

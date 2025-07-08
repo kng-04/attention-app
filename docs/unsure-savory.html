@@ -73,7 +73,14 @@
         if (partner && partner.phone) {
           const phone = encodeURIComponent(partner.phone);
           const message = encodeURIComponent("I don't know what I want but I feel like:\n" + latestUnsureOrder);
+          
+          // Open SMS app
           window.location.href = `sms:${phone}?&body=${message}`;
+
+          // Redirect after short delay
+          setTimeout(() => {
+            window.location.href = "menu.html";
+          }, 500); // 0.5 second delay to let SMS app open first
         } else {
           alert("No partner phone number saved. Please add partner details first.");
         }
