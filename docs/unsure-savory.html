@@ -53,6 +53,14 @@
     </div>
   </div>
 
+  <!-- ====== After SMS View ====== -->
+  <div id="afterSend" style="display:none;text-align:center;margin-top:2em;">
+    <p>Once you're done with your message, click below to go back.</p>
+    <button onclick="window.location.href='menu.html'" class="action-btn">
+      Go to Menu
+    </button>
+  </div>
+
   <script>
     let latestUnsureOrder = "";
 
@@ -67,7 +75,7 @@
         form.style.display = "block";
       });
 
-      // Send → SMS
+      // Send → SMS and show return button
       document.getElementById("sendBtn").addEventListener("click", () => {
         const partner = JSON.parse(localStorage.getItem("partnerDetails"));
         if (partner && partner.phone) {
@@ -77,17 +85,14 @@
           // Open SMS app
           window.location.href = `sms:${phone}?&body=${message}`;
 
-          // Redirect after short delay
-          setTimeout(() => {
-            window.location.href = "menu.html";
-          }, 500); // 0.5 second delay to let SMS app open first
+          // Show return button instead of auto redirect
+          summaryWrapper.style.display = "none";
+          document.getElementById("afterSend").style.display = "block";
         } else {
           alert("No partner phone number saved. Please add partner details first.");
         }
 
         form.reset();
-        summaryWrapper.style.display = "none";
-        form.style.display = "block";
       });
 
       // Submit → validate & show summary

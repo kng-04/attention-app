@@ -35,8 +35,7 @@
     </select>
 
     <div id="specificDessertWrapper" class="inline-inputs hidden" style="margin-top:1em;">
-      <input id="specificDessert" type="text" class="input-box"
-             placeholder="Enter specific dessert" />
+      <input id="specificDessert" type="text" class="input-box" placeholder="Enter specific dessert" />
     </div>
 
     <div style="text-align:center;margin-top:1em;">
@@ -61,6 +60,14 @@
         <img src="./assets/text.png" alt="Send icon" /> Send Text
       </button>
     </div>
+  </div>
+
+  <!-- ============ RETURN TO MENU BUTTON ============ -->
+  <div id="afterSend" style="display:none;text-align:center;margin-top:2em;">
+    <p>Once you're done with your message, click below to go back.</p>
+    <button onclick="window.location.href='menu.html'" class="action-btn">
+      Go to Menu
+    </button>
   </div>
 
   <!-- ============ SCRIPT ============ -->
@@ -93,7 +100,7 @@
 
     editBtn.addEventListener('click', () => {
       orderSummary.style.display = 'none';
-      dessertForm.style.display  = 'block';
+      dessertForm.style.display = 'block';
     });
 
     sendBtn.addEventListener('click', () => {
@@ -102,16 +109,16 @@
         alert('No partner phone number saved. Please add partner details first.');
         return;
       }
+
       const fullMsg = `I don't know what I want but I feel like:\n${latestDessertMsg}`;
       const sms = `sms:${encodeURIComponent(partner.phone)}?&body=${encodeURIComponent(fullMsg)}`;
 
       // Open SMS app
       window.location.href = sms;
 
-      // Then redirect to menu.html after a short delay
-      setTimeout(() => {
-        window.location.href = 'menu.html';
-      }, 500); // Adjust delay if needed
+      // When user returns to the browser, show 'return to menu' button
+      orderSummary.style.display = 'none';
+      document.getElementById('afterSend').style.display = 'block';
     });
   </script>
 </body>
