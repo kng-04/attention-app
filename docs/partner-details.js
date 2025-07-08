@@ -1,6 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('partnerForm');
+  const urlParams = new URLSearchParams(window.location.search);
+  const isEdit = urlParams.get('edit') === '1';
 
+  // Prefill if editing
+  if (isEdit) {
+    const stored = localStorage.getItem('partnerDetails');
+    if (stored) {
+      try {
+        const data = JSON.parse(stored);
+        if (data.firstName && data.lastName && data.phone) {
+          document.getElementById('partnerFName').value = data.firstName;
+          document.getElementById('partnerLName').value = data.lastName;
+          // Remove +64 for editing if it was stored with it
+          document.getElementById('partnerPhone').value = data.phone.replace(/^\+64/, '0');
+        }
+      } catch (e) {
+        console.warn('Invalid partnerDetails format');
+      }
+    }
+  }
+
+  // Save on submit
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -18,7 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const partnerData = {
-        name: `${firstName} ${lastName}`,
+        firstName,
+        lastName,
         phone: formattedPhone
       };
 
