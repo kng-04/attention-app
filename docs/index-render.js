@@ -83,13 +83,41 @@ document.addEventListener('DOMContentLoaded', () => {
         const fails = registerFail();
         alert(`Incorrect PIN (${fails}/3).`);
         if (fails >= 3) {
+          const pinForm = document.getElementById('pinForm');
+
           renderResetButton();
+          // Create warning text
           const warn = document.createElement('p');
           warn.textContent = 'You can now reset your partner details using the button below.';
           warn.style.color = '#f88';
           warn.style.marginTop = '0.5em';
           warn.style.fontWeight = '600';
-          pinPrompt.appendChild(warn);
+
+          // Create the "Forgot PIN" button
+          const forgotBtn = document.createElement('button');
+          forgotBtn.id = 'forgotPinBtn';
+          forgotBtn.className = 'menu-btn';
+          forgotBtn.style.backgroundColor = '#f88';
+          forgotBtn.style.marginTop = '1em';
+          forgotBtn.innerHTML = `
+            <img src="./assets/forgot.png" class="menu-icon" alt="Forgot PIN" />
+            <span>Forgot PIN?</span>
+          `;
+
+          // Add click handler
+          forgotBtn.addEventListener('click', () => {
+            if (confirm('⚠️ This will permanently erase your partner details.')) {
+              localStorage.removeItem('partnerDetails');
+              resetSessionFlags();
+              location.reload();
+            }
+          });
+
+          // Append both below the form
+          if (pinForm) {
+            pinForm.appendChild(warn);
+            pinForm.appendChild(forgotBtn);
+          }
         }
       }
     });
