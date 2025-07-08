@@ -666,4 +666,8 @@ button.menu-btn img.menu-icon {
   vertical-align: middle;
 }
 
+.hidden {
+  display: none;
+}
+
 }

@@ -59,12 +59,21 @@ document.addEventListener('DOMContentLoaded', () => {
         phone: formattedPhone
       };
 
-      if (!isEdit && pin) {
-        partnerData.pin = pin;
+      if (isEdit) {
+        const stored = JSON.parse(localStorage.getItem('partnerDetails') || '{}');
+        if (stored.pin) {
+          partnerData.pin = stored.pin; // retain existing pin
+        }
+      } else if (pin) {
+        partnerData.pin = pin; // set new pin
       }
 
       localStorage.setItem('partnerDetails', JSON.stringify(partnerData));
       localStorage.setItem('partnerDetailsAdded', 'true');
+
+      if (!isEdit) {
+        sessionStorage.setItem('pinValidated', 'true');
+      }
 
       // Redirect back to homepage
       window.location.href = './index.html';
