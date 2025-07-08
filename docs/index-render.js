@@ -13,6 +13,7 @@ window.addEventListener('DOMContentLoaded', () => {
   let data = null;
   try {
     data = JSON.parse(localStorage.getItem('partnerDetails'));
+    // const data = JSON.parse(sessionStorage.getItem('partnerDetails'));
   } catch (e) {
     data = null;
   }

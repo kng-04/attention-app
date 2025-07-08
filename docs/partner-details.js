@@ -47,6 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('partnerDetails', JSON.stringify(partnerData));
       localStorage.setItem('partnerDetailsAdded', 'true');
 
+      //sessionStorage.setItem('partnerDetails', JSON.stringify(partnerData));
+      //sessionStorage.setItem('partnerDetailsAdded', 'true');
+
+
       // ✅ This must redirect to index.html for the updated button to load
       window.location.href = './index.html';
     });
