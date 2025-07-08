@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unsure: Savory</title>
+  <link rel="stylesheet" href="./index.css" />
+</head>
+
+<body class="center-wrapper">
+  <!-- Header -->
+  <div class="header-row">
+    <h1>🍛 Savory Cravings</h1>
+    <a href="./unsure-food-form.html" class="menu-btn">
+      <img src="./assets/back.png" class="menu-icon" alt="Back" />
+      Back to Choice
+    </a>
+  </div>
+
+  <!-- ====== Input Form ====== -->
+  <form id="savourForm" class="form-wrapper">
+    <h2>Cuisine Type</h2>
+    <input id="cuisine" type="text" class="input-box" placeholder="e.g. Chinese, Korean" required />
+
+    <h2>Protein</h2>
+    <input id="protein" type="text" class="input-box" placeholder="e.g. Chicken, Beef" required />
+
+    <h2>Carbs</h2>
+    <input id="carbs" type="text" class="input-box" placeholder="e.g. Rice, Wraps" required />
+
+    <div style="text-align:center; margin-top: 1em;">
+      <button type="submit" class="action-btn">
+        <img src="./assets/save.png" alt="Save icon" />
+        Save
+      </button>
+    </div>
+  </form>
+
+  <!-- ====== Summary Display ====== -->
+  <div id="orderSummary" style="display:none; margin-top: 2em; max-width: 500px; width: 100%;">
+    <h2>🧾 Order Summary</h2>
+    <pre id="summaryText" class="summary-text"></pre>
+
+    <div style="display: flex; gap: 1em; margin-top: 1em; justify-content: center;">
+      <button id="editBtn" class="action-btn" type="button">
+        <img src="./assets/add.png" alt="Edit icon" />
+        Edit Details
+      </button>
+      <button id="sendBtn" class="action-btn" type="button">
+        <img src="./assets/text.png" alt="Send icon" />
+        Send Text
+      </button>
+    </div>
+  </div>
+
+  <script>
+    let latestUnsureOrder = "";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("savourForm");
+      const summaryWrapper = document.getElementById("orderSummary");
+      const summaryText = document.getElementById("summaryText");
+
+      // Edit → return to form
+      document.getElementById("editBtn").addEventListener("click", () => {
+        summaryWrapper.style.display = "none";
+        form.style.display = "block";
+      });
+
+      // Send → SMS
+      document.getElementById("sendBtn").addEventListener("click", () => {
+        const partner = JSON.parse(localStorage.getItem("partnerDetails"));
+        if (partner && partner.phone) {
+          const phone = encodeURIComponent(partner.phone);
+          const message = encodeURIComponent("I don't know what I want but I feel like:\n" + latestUnsureOrder);
+          window.location.href = `sms:${phone}?&body=${message}`;
+        } else {
+          alert("No partner phone number saved. Please add partner details first.");
+        }
+
+        form.reset();
+        summaryWrapper.style.display = "none";
+        form.style.display = "block";
+      });
+
+      // Submit → validate & show summary
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const cuisine = document.getElementById("cuisine").value.trim();
+        const protein = document.getElementById("protein").value.trim();
+        const carbs = document.getElementById("carbs").value.trim();
+
+        if (!cuisine || !protein || !carbs) {
+          alert("Please complete all fields: cuisine, protein, and carbs.");
+          return;
+        }
+
+        let msg = `Maybe some savory food with ${cuisine} cuisine, ${protein}, and ${carbs}`;
+        latestUnsureOrder = msg;
+        summaryText.textContent = `I don't know what I want but I feel like:\n${msg}`;
+
+        form.style.display = "none";
+        summaryWrapper.style.display = "block";
+      });
+    });
+  </script>
+</body>
+</html>

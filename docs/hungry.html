@@ -7,20 +7,41 @@
   <meta name="color-scheme" content="light dark" />
   <meta 
     http-equiv="Content-Security-Policy"
-    content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+    content="default-src 'self';
+              script-src 'self';
+              style-src 'self' 'unsafe-inline';
+              img-src 'self' data:;">
   <title>I'm Hungry</title>
   <link rel="stylesheet" href="./index.css" />
+  <script src="./hungry-render.js" defer></script>
 </head>
 
 <body class="center-wrapper">
-  <h1>🍔 I'm Hungry</h1>
+
+  <div class="header-row">
+    <h1>🍔 I'm Hungry</h1>
+    <button id="backBtn" class="back-btn">
+      <img src="./assets/home.png" alt="Home icon" class="back-icon" />
+      <span>Back to Menu</span>
+    </button>
+  </div>
+
   <p>Food is on its way (hopefully)!</p>
 
-  <button id="backBtn" class="back-btn">
-    <img src="./assets/home.png" alt="Home icon" class="back-icon" />
-    <span>Back to Menu</span>
-  </button>
+  <!-- Two side-by-side buttons -->
+  <div style="display: flex; gap: 1em; justify-content: center; margin-top: 2em;">
+    <a href="./food-form.html" class="menu-btn" id="foodFormBtn">
+      <img src="./assets/foodmenu.png" alt="Form icon" class="menu-icon" />
+      <span>Food Form</span>
+    </a>
 
+    <a href="./unsure-food-form.html" class="menu-btn" id="foodFormBtn">
+      <img src="./assets/unsure.png" alt="Unsure icon" class="menu-icon" />
+      <span>I don't know</span>
+    </a>
+  </div>
+
+  <!-- Reuse this across all pages -->
   <script defer src="./back-to-menu.js"></script>
 </body>
 </html>
