@@ -46,12 +46,3 @@ This work is licensed under the **Creative Commons Attribution-NonCommercial-NoD
 - **NoDerivatives:** If you remix, transform, or build upon the material, you may not distribute the modified material.  
 
 📄 **Full license text:** [Creative Commons BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)
-
----
-
-## 📬 Contact
-Got a tech idea or need help with small tech problems?  
-I also offer custom simple apps like this one, and friendly tech support.  
-
-📧 **Email:** simpletechhelpnz@gmail.com
-
