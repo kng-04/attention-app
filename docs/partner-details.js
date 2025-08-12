@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('partnerForm');
   const pinField = document.getElementById('pinFieldContainer');
+  const countrySel = document.getElementById('countryCode');
+  const phoneInput = document.getElementById('partnerPhone');
 
   // Check if editing an existing user
   const params = new URLSearchParams(window.location.search);
@@ -8,13 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (isEdit) {
     // Hide the PIN field when editing
-    if (pinField) {
-      pinField.style.display = 'none';
-    }
+    if (pinField) pinField.style.display = 'none';
     const pinInput = document.getElementById('partnerPin');
-    if (pinInput) {
-      pinInput.removeAttribute('required');
-    }
+    if (pinInput) pinInput.removeAttribute('required');
   }
 
   // Prefill fields if editing
@@ -23,10 +21,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (stored) {
       try {
         const data = JSON.parse(stored);
-        if (data.firstName && data.lastName && data.phone) {
-          document.getElementById('partnerFName').value = data.firstName;
-          document.getElementById('partnerLName').value = data.lastName;
-          document.getElementById('partnerPhone').value = data.phone.replace(/^\+64/, '0');
+
+        if (data.firstName) document.getElementById('partnerFName').value = data.firstName;
+        if (data.lastName) document.getElementById('partnerLName').value = data.lastName;
+
+        // Prefill country & local number from stored E.164-like value
+        if (data.phone && countrySel && phoneInput) {
+          if (data.phone.startsWith('+64')) {
+            countrySel.value = '+64';
+            // Show local NZ number without +64 (no leading 0 added)
+            phoneInput.value = data.phone.replace(/^\+64/, '');
+          } else if (data.phone.startsWith('+852')) {
+            countrySel.value = '+852';
+            // Show local HK number without +852
+            phoneInput.value = data.phone.replace(/^\+852/, '');
+          } else {
+            // Fallback: leave country as current selection, show raw
+            phoneInput.value = data.phone.replace(/^\+\d+/, '');
+          }
         }
       } catch (e) {
         console.warn('Invalid partnerDetails format');
@@ -41,14 +53,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const firstName = document.getElementById('partnerFName').value.trim();
       const lastName = document.getElementById('partnerLName').value.trim();
-      const phoneRaw = document.getElementById('partnerPhone').value.trim().replace(/\s+/g, '');
-      const formattedPhone = phoneRaw.startsWith('0') ? '+64' + phoneRaw.slice(1) : phoneRaw;
-
       const pinInput = document.getElementById('partnerPin');
+
+      // Basic field checks
+      const rawLocal = (phoneInput?.value || '').trim().replace(/\s+/g, '');
+      const countryCode = (countrySel?.value || '').trim();
+
+      // Build stored number:
+      // - For NZ: strip a leading trunk "0" if user typed one (e.g., 021… -> +64 21…)
+      // - For HK: do NOT strip leading zeros (HK numbers typically don't start with 0 anyway)
+      let local = rawLocal;
+      if (countryCode === '+64') {
+        local = rawLocal.replace(/^0+/, '');
+      }
+
+      const formattedPhone = countryCode + local;
+
       const pin = pinInput ? pinInput.value.trim() : '';
 
       // Validate fields
-      if (!firstName || !lastName || !phoneRaw || (!isEdit && (!pin || !/^\d{4}$/.test(pin)))) {
+      if (!firstName || !lastName || !rawLocal || !countryCode ||
+          (!isEdit && (!pin || !/^\d{4}$/.test(pin)))) {
         alert('Please fill in all fields correctly' + (!isEdit ? ' including a 4-digit PIN.' : '.'));
         return;
       }
