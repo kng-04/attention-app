@@ -27,14 +27,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Prefill country & local number from stored E.164-like value
         if (data.phone && countrySel && phoneInput) {
-          if (data.phone.startsWith('+64')) {
+          if (data.phone.startsWith('+64')) { //New Zealand
             countrySel.value = '+64';
             // Show local NZ number without +64 (no leading 0 added)
             phoneInput.value = data.phone.replace(/^\+64/, '');
-          } else if (data.phone.startsWith('+852')) {
+          } else if (data.phone.startsWith('+852')) { //Hong Kong
             countrySel.value = '+852';
             // Show local HK number without +852
             phoneInput.value = data.phone.replace(/^\+852/, '');
+          } else if (data.phone.startsWith('+49')) { //Germany
+            countrySel.value = '+49';
+            phoneInput.value = data.phone.replace(/^\+49/, '');
           } else {
             // Fallback: leave country as current selection, show raw
             phoneInput.value = data.phone.replace(/^\+\d+/, '');
@@ -63,8 +66,15 @@ document.addEventListener('DOMContentLoaded', () => {
       // - For NZ: strip a leading trunk "0" if user typed one (e.g., 021… -> +64 21…)
       // - For HK: do NOT strip leading zeros (HK numbers typically don't start with 0 anyway)
       let local = rawLocal;
-      if (countryCode === '+64') {
-        local = rawLocal.replace(/^0+/, '');
+
+      // If user typed a full +code, strip it so we don't end up with +64+64...
+      if (rawLocal.startsWith('+')) {
+        local = rawLocal.replace(/^\+\d+/, '');
+      }
+
+      // Remove trunk zeros for NZ and DE (not HK)
+      if (countryCode === '+64' || countryCode === '+49') {
+        local = local.replace(/^0+/, '');
       }
 
       const formattedPhone = countryCode + local;
