@@ -72,6 +72,55 @@ body {
   margin-top: 0.6rem;
 }
 
+.access-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.access-card {
+  background: #1f1f1f;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  width: min(90%, 420px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  text-align: center;
+}
+
+.access-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.access-card input {
+  padding: 0.75rem;
+  border-radius: 12px;
+  border: 1px solid #888;
+  font-size: 1rem;
+}
+
+.access-card button {
+  padding: 0.75rem;
+  border-radius: 12px;
+  border: none;
+  background: #fddfea;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.access-error {
+  color: #ff9292;
+  min-height: 1.2rem;
+  margin-top: 0.5rem;
+}
+
 .emoji-btn span {
   z-index: 1;
   padding: 0.2rem 0.5rem;

@@ -15,7 +15,7 @@
   <script src="./index-render.js" defer></script>
 </head>
 
-<body class="center-wrapper">
+<body class="center-wrapper" data-access-code="ATTENTION2025">
   <h1>💖 Attention App!</h1>
   <p>Welcome to your get my attention app.</p>
 
@@ -45,6 +45,18 @@
       <img src="./assets/add.png" alt="Edit" class="menu-icon" />
       <span>Edit Details</span>
     </a>
+  </div>
+
+  <div id="accessOverlay" class="access-overlay hidden">
+    <div class="access-card">
+      <h2>Access Required</h2>
+      <p>Enter the access code you received to open the app.</p>
+      <form id="accessForm">
+        <input type="password" id="accessInput" placeholder="Access code" autocomplete="off" required />
+        <button type="submit">Unlock</button>
+      </form>
+      <p id="accessError" class="access-error"></p>
+    </div>
   </div>
 </body>
 </html>

@@ -13,7 +13,7 @@
   <script defer src="./menu.js"></script>
 </head>
 
-<body>
+<body data-access-code="JCB1314">
   <div class="header-row">
     <h1>📋 Menu</h1>
     <button id="backBtn" class="back-btn">
@@ -31,6 +31,19 @@
       <span>Weekly Time Sheet</span>
       <img src="./assets/time.png" alt="Clock icon" class="time-icon" />
     </button>
+  </div>
+
+  <div id="accessOverlay" class="access-overlay hidden">
+    <div class="access-card">
+      <h2>Access Required</h2>
+      <p>Enter the access code you received to open the menu.</p>
+      <p>Contact Simple Ng for access code</p>
+      <form id="accessForm">
+        <input type="password" id="accessInput" placeholder="Access code" autocomplete="off" required />
+        <button type="submit">Unlock</button>
+      </form>
+      <p id="accessError" class="access-error"></p>
+    </div>
   </div>
 </body>
 
