@@ -62,17 +62,14 @@ body {
 .hug-btn  { background-image: url('./assets/hug.png'); }
 .food-btn { background-image: url('./assets/food.png'); }
 .time-btn {
-  background-image: none;
-  background-color: #fddfea;
-  justify-content: flex-start;
-  gap: 1rem;
+  background-color: #b3d9ff !important;
+  padding-top: 0.75rem;
 }
 
 .time-btn .time-icon {
-  width: 120px;
+  width: 140px;
   height: auto;
-  margin-top: 1.75rem;
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+  margin-top: 0.6rem;
 }
 
 .emoji-btn span {
