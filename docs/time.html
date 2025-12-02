@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self';
+             script-src 'self';
+             style-src 'self' 'unsafe-inline';
+             img-src 'self' data:;">
+  <title>Weekly Time Sheet</title>
+  <link rel="stylesheet" href="./index.css" />
+  <link rel="stylesheet" href="./time.css" />
+  <script defer src="./time.js"></script>
+</head>
+
+<body>
+  <div class="header-row">
+    <h1>🕒 Weekly Time Sheet</h1>
+    <button id="backBtn" class="back-btn">
+      <img src="./assets/home.png" alt="Home icon" class="back-icon" />
+      <span>Back to Menu</span>
+    </button>
+  </div>
+
+  <div class="period-section">
+    <h2 class="timesheet-title">Weekly Time Sheet</h2>
+    <p>Enter your start/end times for each day</p>
+    <div class="period-inputs">
+      <label for="periodStart">
+        Period Start
+        <input type="date" id="periodStart" name="periodStart" />
+      </label>
+      <label for="periodEnd">
+        Period End
+        <input type="date" id="periodEnd" name="periodEnd" />
+      </label>
+    </div>
+    <p id="periodHint" class="period-hint hidden">Set both dates to start filling your weekly hours.</p>
+  </div>
+
+  <div class="timesheet-wrapper">
+    <div class="timesheet-card">
+      <div class="timesheet-table-container">
+        <table class="timesheet-table">
+          <thead>
+            <tr>
+              <th scope="col">Day</th>
+              <th scope="col">Didn't Work</th>
+              <th scope="col">Start</th>
+              <th scope="col">End</th>
+              <th scope="col">Break (mins)</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody id="timesheetBody"></tbody>
+        </table>
+      </div>
+
+      <div class="timesheet-summary">
+        <div class="weekly-total-block">
+          <strong>Total Hours: <span id="weeklyTotal">0.00</span> hrs</strong>
+          <p id="weeklyBreakdown" class="weekly-breakdown">0 h 0 mins</p>
+        </div>
+        <div class="timesheet-actions">
+          <button id="savePdfBtn" type="button" class="secondary-btn">
+            <img src="./assets/save.png" alt="Save icon" class="menu-icon" />
+            Save PDF
+          </button>
+          <button id="clearTimesheetBtn" type="button">
+            <img src="./assets/time.png" alt="Reset icon" class="menu-icon" />
+            Clear Week
+          </button>
+        </div>
+      </div>
+
+      <div class="timesheet-watermark" aria-hidden="true">
+        Created by Simple Ng / attention-app
+      </div>
+    </div>
+  </div>
+
+  <script src="./back-to-menu.js" defer></script>
+</body>
+
+</html>

@@ -26,4 +26,8 @@ window.addEventListener('DOMContentLoaded', () => {
   document.querySelector('.food-btn')?.addEventListener('click', () => {
     window.location.href = './hungry.html';
   });
+
+  document.querySelector('.time-btn')?.addEventListener('click', () => {
+    window.open('./time.html', '_blank');
+  });
 });

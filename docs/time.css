@@ -1,0 +1,406 @@
+.timesheet-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.period-section {
+  margin-top: 1.5rem;
+}
+
+.timesheet-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.6rem;
+}
+
+.period-inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.period-hint {
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: #a12755;
+}
+
+.period-inputs label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  gap: 0.35rem;
+}
+
+.period-inputs input {
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.timesheet-card {
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: min(900px, 100%);
+  background: rgba(255, 215, 235, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.timesheet-table-container {
+  width: 100%;
+  overflow-x: scroll;
+  padding-bottom: 0.35rem; /* space for the scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: #cba7d6 transparent;
+}
+
+.timesheet-table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.timesheet-table-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+}
+
+.timesheet-table-container::-webkit-scrollbar-thumb {
+  background: #cba7d6;
+  border-radius: 999px;
+}
+
+.timesheet-table-container::-webkit-scrollbar-thumb:hover {
+  background: #b184c3;
+}
+
+.timesheet-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  min-width: 600px;
+}
+
+.timesheet-table th,
+.timesheet-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e2e2e2;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.day-name {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.day-date {
+  font-size: 0.85rem;
+  color: #383838;
+  font-weight: 600;
+}
+
+.timesheet-table input {
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.timesheet-table tbody tr td:last-child {
+  min-width: 120px;
+}
+
+.break-cell {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.break-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 100px;
+}
+
+.break-fields input {
+  min-width: 95px;
+}
+
+.break-field {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.remove-break-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #caa0cf;
+  background-color: #fff;
+  color: #000;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.remove-break-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.add-break-btn {
+  align-self: flex-start;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid #caa0cf;
+  background-color: #fddfea;
+  font-size: 1.1rem;
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+  color: #000;
+}
+
+.add-break-btn:hover:not(:disabled) {
+  background-color: #ffcfe0;
+}
+
+.add-break-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.daily-total-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.daily-breakdown {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #4a4a4a;
+  font-weight: 600;
+}
+
+.timesheet-summary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e2e2;
+}
+
+.timesheet-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.timesheet-summary strong {
+  font-size: 1.25rem;
+}
+
+.weekly-total-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.weekly-breakdown {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #4a4a4a;
+}
+
+.timesheet-summary button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: #fddfea;
+  border: none;
+  border-radius: 12px;
+  padding: 0.6rem 1rem;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+}
+
+.timesheet-summary button:hover {
+  background-color: #ffcfe0;
+}
+
+.timesheet-actions .secondary-btn {
+  background-color: #ffeef5;
+}
+
+.timesheet-watermark {
+  display: none;
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.1rem;
+}
+
+.off-cell {
+  width: 80px;
+  text-align: center;
+}
+
+.off-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.off-toggle input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+
+  .timesheet-card {
+    padding: 1rem;
+  }
+
+  .timesheet-summary {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .timesheet-summary button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .period-inputs {
+    flex-direction: column;
+  }
+
+  .timesheet-table {
+    min-width: 100%;
+  }
+
+  .timesheet-table th,
+  .timesheet-table td {
+    padding: 0.5rem;
+  }
+
+  .timesheet-table input {
+    font-size: 0.95rem;
+  }
+
+  .daily-breakdown,
+  .weekly-breakdown {
+    font-size: 0.85rem;
+  }
+
+  .break-cell {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .break-fields {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .break-fields input {
+    min-width: 80px;
+  }
+}
+
+@media print {
+  @page {
+    margin: 10mm;
+  }
+
+  html,
+  body {
+    padding: 0;
+    margin: 0;
+    background: #fff;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .header-row,
+  .back-btn {
+    display: none;
+  }
+
+  .timesheet-wrapper {
+    margin-top: 0;
+    width: 100%;
+    justify-content: flex-start;
+    padding-bottom: 0;
+  }
+
+  .timesheet-card {
+    width: 100%;
+    max-width: 100%;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .timesheet-title {
+    margin-bottom: 0.6rem;
+  }
+
+  .timesheet-table-container {
+    overflow: visible;
+  }
+
+  .timesheet-table {
+    min-width: 100%;
+    width: 100%;
+  }
+
+  .timesheet-summary button {
+    display: none;
+  }
+
+  .timesheet-table th,
+  .timesheet-table td {
+    padding: 0.4rem;
+  }
+
+  .timesheet-watermark {
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-18deg);
+    font-size: 2.6rem;
+    letter-spacing: 0.25rem;
+    color: rgba(0, 0, 0, 0.06);
+    pointer-events: none;
+    text-transform: uppercase;
+  }
+}
