@@ -29,7 +29,7 @@ Whether it’s a partner, family member, or friend, they’ll know exactly what 
 
 ## 📝 License
 
-Copyright (c) 2025 [Your Name or Business Name]  
+Copyright (c) 2025 Krystal Ng
 
 This work is licensed under the **Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License**.  
 
